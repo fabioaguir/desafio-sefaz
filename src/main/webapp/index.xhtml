@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:p="http://primefaces.org/ui">
+
+<h:head>
+</h:head>
+
+<h:body>
+	<p:panelGrid style="margin-top:20px">
+		<f:facet name="header">
+			<p:row>
+				<p:column colspan="7">Lista de Usuários</p:column>
+			</p:row>
+		</f:facet>
+		<p:row>
+			<p:column colspan="2">
+				<h:form>
+					<p:commandButton update="dlgFormUsuario,tableUsuario" action="#{usuarioView.cadastrar}"
+						value="Cadastrar Usuário" style="margin-right:20px;">
+					</p:commandButton>
+				</h:form>
+			</p:column>
+		</p:row>
+		<p:row>
+			<p:column>
+				<p:dataTable var="usuario" id="tableUsuario"
+					value="#{usuarioView.usuarios}" rows="10" paginator="true"
+					paginatorTemplate="{CurrentPageReport} {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}"
+					rowsPerPageTemplate="5,10,15">
+					<p:column headerText="Id" width="10%">
+						<h:outputText value="#{usuario.id}" />
+					</p:column>
+
+					<p:column headerText="Nome">
+						<h:outputText value="#{usuario.nome}" />
+					</p:column>
+
+					<p:column headerText="E-mail" width="30%">
+						<h:outputText value="#{usuario.email}" />
+					</p:column>
+
+					<p:column headerText="Ação" width="20%">
+						<p:commandButton update="dlgFormUsuario,tableUsuario" action="#{usuarioView.editar(usuario)}" value="Editar"
+							style="margin-right:20px;">
+						</p:commandButton>
+						<p:commandButton update="tableUsuario"
+							action="#{usuarioView.deletar(usuario)}" value="Deletar"
+							style="margin-right:20px;">
+						</p:commandButton>
+					</p:column>
+				</p:dataTable>
+			</p:column>
+		</p:row>
+	</p:panelGrid>
+
+	<p:dialog header="Cadastrar/Alterar Usuário" widgetVar="dlgFormUsuario" id="dlgFormUsuario" modal="true"
+		height="30%" width="50%">
+		<h:form id="formUsuario">
+		<h:panelGrid columns="2" cellpadding="5" id="grid">
+			<p:outputLabel value="Nome:" for="nome" />
+			<p:inputText id="nome" value="#{usuarioView.usuario.nome}" />
+
+			<p:outputLabel value="E-mail:" for="email" />
+			<p:inputText id="email" value="#{usuarioView.usuario.email}" />
+
+			<p:outputLabel value="Senha:" for="senha" />
+			<p:inputText id="senha" value="#{usuarioView.usuario.senha}" />
+		</h:panelGrid>
+		
+		<p:commandButton action="#{usuarioView.salvar}" value="Salvar" style="margin-right:20px;">
+		</p:commandButton >
+	</h:form>
+	</p:dialog>
+	
+</h:body>
+</html>
