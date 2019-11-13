@@ -14,7 +14,7 @@ public class UsuarioService {
     
 	private UsuarioDAO dao = new UsuarioDAO();
 	
-    public void createUsuario(Usuario usuario) {
+    public void createUpdateUsuario(Usuario usuario) {
     	this.dao.save(usuario);
     }
     

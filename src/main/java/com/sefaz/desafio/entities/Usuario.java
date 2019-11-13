@@ -1,6 +1,7 @@
 package com.sefaz.desafio.entities;
 
 
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.persistence.Entity;
@@ -23,7 +24,7 @@ public class Usuario {
 	private String senha;
 	
 	@OneToMany(mappedBy = "usuario")
-	private List<Telefone> telefones;
+	private List<Telefone> telefones = new ArrayList<Telefone>();
 	
 	public Usuario() {
 		

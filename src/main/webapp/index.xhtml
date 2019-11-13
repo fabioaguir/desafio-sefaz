@@ -17,8 +17,9 @@
 		<p:row>
 			<p:column colspan="2">
 				<h:form>
-					<p:commandButton update="dlgFormUsuario,tableUsuario" action="#{usuarioView.cadastrar}"
-						value="Cadastrar Usuário" style="margin-right:20px;">
+					<p:commandButton update="dlgFormUsuario,tableUsuario"
+						action="#{usuarioView.cadastrar}" value="Cadastrar Usuário"
+						style="margin-right:20px;">
 					</p:commandButton>
 				</h:form>
 			</p:column>
@@ -42,7 +43,8 @@
 					</p:column>
 
 					<p:column headerText="Ação" width="20%">
-						<p:commandButton update="dlgFormUsuario,tableUsuario" action="#{usuarioView.editar(usuario)}" value="Editar"
+						<p:commandButton update="dlgFormUsuario,tableUsuario"
+							action="#{usuarioView.editar(usuario)}" value="Editar"
 							style="margin-right:20px;">
 						</p:commandButton>
 						<p:commandButton update="tableUsuario"
@@ -55,24 +57,75 @@
 		</p:row>
 	</p:panelGrid>
 
-	<p:dialog header="Cadastrar/Alterar Usuário" widgetVar="dlgFormUsuario" id="dlgFormUsuario" modal="true"
-		height="30%" width="50%">
-		<h:form id="formUsuario">
-		<h:panelGrid columns="2" cellpadding="5" id="grid">
-			<p:outputLabel value="Nome:" for="nome" />
-			<p:inputText id="nome" value="#{usuarioView.usuario.nome}" />
+	<p:dialog header="Cadastrar/Alterar Usuário" widgetVar="dlgFormUsuario"
+		id="dlgFormUsuario" modal="true" height="30%" width="50%">
+		<p:tabView>
+			<p:tab title="Dados principais">
+				<h:form id="formUsuario">
+					<h:panelGrid columns="2" cellpadding="5" id="grid">
+						<p:outputLabel value="Nome:" for="nome" />
+						<p:inputText id="nome" value="#{usuarioView.usuario.nome}" />
 
-			<p:outputLabel value="E-mail:" for="email" />
-			<p:inputText id="email" value="#{usuarioView.usuario.email}" />
+						<p:outputLabel value="E-mail:" for="email" />
+						<p:inputText id="email" value="#{usuarioView.usuario.email}" />
 
-			<p:outputLabel value="Senha:" for="senha" />
-			<p:inputText id="senha" value="#{usuarioView.usuario.senha}" />
-		</h:panelGrid>
-		
-		<p:commandButton action="#{usuarioView.salvar}" value="Salvar" style="margin-right:20px;">
-		</p:commandButton >
-	</h:form>
+						<p:outputLabel value="Senha:" for="senha" />
+						<p:inputText id="senha" value="#{usuarioView.usuario.senha}" />
+					</h:panelGrid>
+
+					<p:commandButton action="#{usuarioView.salvar}" value="Salvar"
+						style="margin-right:20px;">
+					</p:commandButton>
+				</h:form>
+			</p:tab>
+			<p:tab title="Telefones">
+				<h:form id="formTelefone">
+					<h:panelGrid columns="2" cellpadding="5" id="grid">
+						<p:outputLabel value="Tipo:" for="tipo-tel" />
+						<p:selectOneMenu id="tipo-tel"
+							value="#{usuarioView.telefone.tipo}" style="width:125px">
+							<f:selectItem itemLabel="Selecione" itemValue="" />
+							<f:selectItem itemLabel="Telefone" itemValue="Telefone" />
+							<f:selectItem itemLabel="Celular" itemValue="Celular" />
+						</p:selectOneMenu>
+
+						<p:outputLabel value="DDD:" for="ddd" />
+						<p:inputText id="ddd" value="#{usuarioView.telefone.ddd}" />
+
+						<p:outputLabel value="Número:" for="numero" />
+						<p:inputText id="numero" value="#{usuarioView.telefone.numero}" />
+
+						<p:commandButton update="tableTelefones,formTelefone"
+							action="#{usuarioView.addTelefone}" value="Adicionar"
+							style="margin-right:20px;">
+						</p:commandButton>
+					</h:panelGrid>
+					<br />
+					<p:dataTable var="telefone" id="tableTelefones"
+						value="#{usuarioView.usuario.telefones}">
+						<p:column headerText="Tipo">
+							<h:outputText value="#{telefone.tipo}" />
+						</p:column>
+
+						<p:column headerText="DDD">
+							<h:outputText value="#{telefone.ddd}" />
+						</p:column>
+
+						<p:column headerText="Número">
+							<h:outputText value="#{telefone.numero}" />
+						</p:column>
+
+						<p:column headerText="Ação">
+							<p:commandButton update="tableTelefones"
+								action="#{usuarioView.removerTelefone(telefone)}"
+								value="Remover" style="margin-right:20px;">
+							</p:commandButton>
+						</p:column>
+					</p:dataTable>
+				</h:form>
+			</p:tab>
+		</p:tabView>
 	</p:dialog>
-	
+
 </h:body>
 </html>

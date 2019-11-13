@@ -7,10 +7,10 @@
 	
 	<properties>
 		<property name="javax.persistence.jdbc.url" value="jdbc:mysql://localhost:3306/sefaz?useSSL=false&amp;serverTimezone=UTC"/>
-		<property name="javax.persistence.jdbc.user" value="hive"/>
-		<property name="javax.persistence.jdbc.password" value="hive"/>
+		<property name="javax.persistence.jdbc.user" value="sefaz"/>
+		<property name="javax.persistence.jdbc.password" value="sefaz"/>
 		<property name="javax.persistence.jdbc.driver" value="com.mysql.cj.jdbc.Driver"/>
-		<property name="hibernate.default_schema" value="sefaz"/>
+
 		<property name="hibernate.dialect" value="org.hibernate.dialect.MySQL5Dialect"/>
 		<property name="hibernate.show_sql" value="true"/>
 		<property name="hibernate.format_sql" value="true"/>
